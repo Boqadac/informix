@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+    http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+	<context:annotation-config />
+	<context:component-scan base-package="main" />
+	
+	<jpa:repositories base-package="dao"/>
+
+
+<!--   <bean id="fileEventType" class="com.devdaily.springtest1.bean.FileEventType"> -->
+<!--     <property name="eventType" value="10"/> -->
+<!--     <property name="description" value="A sample description here"/> -->
+<!--   </bean> -->
+
+<!--   <bean id="fileEventDao" class="com.devdaily.springtest1.dao.FileEventDao"> -->
+<!--     <property name="dataSource" ref="basicDataSource"/> -->
+<!--   </bean> -->
+
+  	<!-- spring transaction manager -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+ 	 <bean class="org.springframework.orm.hibernate4.HibernateExceptionTranslator"/>
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	  <property name="driverClass" value="com.informix.jdbc.IfxDriver" />
+<!-- 	  <property name="url" value="jdbc:informix-sqli://192.168.221.99:9088/hppcdb:INFORMIXSERVER=ol_hppc;user=informix;password=Siemens2;protocol=olsoctp"/>  -->
+	  <property name="url" value="jdbc:informix-sqli://10.0.2.2:12331/hppcdb:INFORMIXSERVER=ol_hppc;user=informix;password=Siemens2;protocol=olsoctp"/> 
+
+	</bean>
+
+</beans>
